@@ -1,0 +1,75 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div>
+        <div id = "box4">
+        </div>
+        <div id = "box5">
+        </div>
+        <ul id = "star-list">
+            <li  id = "star-decoration" class="fa fa-star star-review"></li>
+            <li  id = "star-decoration" class="fa fa-star star-review"></li>
+            <li  id = "star-decoration" class="fa fa-star star-review"></li>
+            <li  id = "star-decoration" class="fa fa-star star-review"></li>
+            <li  id = "star-decoration" class="fa fa-star star-review"></li>
+        </ul>
+
+        <div id = "reviews-container">
+            <div id = "reviews-title">Reviews</div>
+            <br>
+            <div id = "review-btns">
+                <button id = "leave-review-btn">Leave a Review</button>
+                <span id = "full-filter">
+                    Filter:
+                    <select id = "filter-item">
+                        <option class = "filter-option" value = "All">All</option>
+                        {% for item in menu_items %}
+                            <option class = "filter-option" value = "{{ item.name }}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </div>
+            <br>
+            <div id = 'compose-view'>
+                <div id = "your-review">Your Review:</div> <br>
+                <form id = 'compose-form'>
+                    <div>
+                        <input disabled id = 'reviewer' value = "{{ request.user.username}}" style = "display: none;">
+                    </div>
+                    <div>
+                        <select id = "select-item">
+                            <option style= 'display: none;' disabled selected value>Select an Item</option>
+                            {% for item in menu_items %}
+                                <option class = 'review-item' value = "{{item.name}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <span>
+                            <input type = "submit" id = 'submit-review' value = "Submit">
+                        </span>
+                    </div><br>
+                    <div>
+                        <span id = "rating-star" class="fa fa-star star-review rating-star" onclick = "checked(1)"></span>
+                        <span id = "rating-star" class="fa fa-star star-review rating-star" onclick = "checked(2)"></span>
+                        <span id = "rating-star" class="fa fa-star star-review rating-star" onclick = "checked(3)"></span>
+                        <span id = "rating-star" class="fa fa-star star-review rating-star" onclick = "checked(4)"></span>
+                        <span id = "rating-star" class="fa fa-star star-review rating-star" onclick = "checked(5)"></span>
+                    </div> <br>
+                    <div>
+                        <textarea id = "content-form" placeholder = "Write your review here" maxlength="200"></textarea>
+                    </div>
+                </form>
+            </div> 
+            <br>
+            <ul id = 'review-view'></div>
+            </div>
+            <a id = "prev-reviews" class = "prev">&#10094;</a>  
+            <a id = "next-reviews" class = "next">&#10095;</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src = "{% static 'website/reviews.js' %}"></script>
+{% endblock %}

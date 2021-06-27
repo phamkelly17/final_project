@@ -1,0 +1,10 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+
+{% block body%}
+    <form action = "{% url 'edit_menu' %}" method = 'post' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <input type = "submit" value = "Add Item">
+    </form>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div>
+        <div id = "home-background">
+            <div id="box1"></div>
+            <div id = "box2"></div>      
+        </div>
+
+        <div id = "slideshow-container">
+            <div class = "slides">
+                <img class= 'slide-img' src = "{{ home.slide_img1.url }}">
+            </div>
+            
+            <div class = "slides">
+                <img class= 'slide-img' src = "{{ home.slide_img2.url }}">
+            </div>
+            <div class = "slides">
+                <img class= 'slide-img' src = "{{ home.slide_img3.url }}">
+            </div>
+            <div class = "slides">
+                <img class= 'slide-img' src = "{{ home.slide_img4.url }}">
+            </div>
+            <div class = "slides">
+                <img class= 'slide-img' src = "{{ home.slide_img5.url }}">
+            </div>   
+            <a class = "prev" id = "prev-home">&#10094;</a>  
+            <a class = "next" id = "next-home">&#10095;</a>
+            <div id = "dots" style = 'text: align-center'>
+                <span onclick = "show_slide(0)" class="dot" id = "clicked-dot"></span>
+                <span onclick = "show_slide(1)"class="dot"></span>
+                <span onclick = "show_slide(2)" class="dot"></span>
+                <span onclick = "show_slide(3)" class="dot"></span>
+                <span onclick = "show_slide(4)" class="dot"></span>
+            </div>
+            
+        </div>
+        
+        <div id = "home-info">
+            {% if user.is_authenticated %}
+                <div id = "welcome">Welcome {{user.username}}!</div>
+            {%else%}
+                <div>Welcome to Kelly's Shop</div>
+            {% endif %}
+            <p id = "intro">
+                Kelly's Shop provides homemade snacks and treats made with fresh ingredients and love. Shop today.
+            </p>
+            <button onclick = "location.href = 'http://127.0.0.1:8000/menu';" class = "home-buttons" id = "menu-btn">Click to see our menu</button>
+            <div id = "separator"></div>
+            <div id = "btn-list">
+                <ul>
+                    <li>
+                        <button onclick = "location.href = 'http://127.0.0.1:8000/about';" class = "home-buttons">About</button>
+                    </li>
+                    <li>
+                        <button onclick = "location.href = 'http://127.0.0.1:8000/reviews';" class = "home-buttons">Reviews</button>
+                    </li>
+                    <li>
+                        <button onclick = "location.href = 'http://127.0.0.1:8000/contact';" class = "home-buttons">Contact</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src = "{% static 'website/home.js' %}">
+    </script>
+{% endblock %}

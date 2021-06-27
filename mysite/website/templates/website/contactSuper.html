@@ -1,0 +1,44 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body%}
+    <div id = "contact-container">
+        <div id = "view-sender">
+            <div id = "all-senders">All Senders:</div>
+            <div style = "font-weight: bold;">User:
+                <span style = "position:relative; left: 12%;">Unread Messages:</span>
+            </div>
+            <div style = "display:inline;">
+                {% for sender in sender_list%}
+                    <div class = "get-sender" onclick = "get_sender('{{sender}}')">{{sender}}</div>
+                {% endfor %}
+                <div class = "unread"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id = "contact-chat">
+        <div id = "chat-popup">
+            <div id = "message-view">
+            </div>
+            <form id = 'contact-form'>
+                <input class = "receiver" style = "display:none;">
+                <input class = "sender" value="{{ request.user.username }}"style = "display:none;">
+                <div>
+                    <textarea id="compose-message"></textarea> 
+                </div>
+                <input type="submit" id = "send" value = "↑"/>
+            </form>
+        </div>
+        <div id = "chatbar">
+            <span id = "chat-w-us">Chat</span><span id = "chatbar-icon">&#9650;</span>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script%}
+    <script src = "{% static 'website/contact.js' %}">
+    </script>
+{% endblock %}

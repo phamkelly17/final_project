@@ -1,0 +1,68 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div>
+        <div id = "contact-container">
+            <div id = "contact-title">Contact</div>
+            <div id = "contact-intro">
+                <span>Have any allergies, questions, or concerns? </span>
+                <span>We'd love to get in contact with you! </span>
+                <span>Just reach at our information listed below or use the chat function on this page and we'll try to get to you ASAP.</span>
+            </div><br>
+                <ul id = "contact-list">
+                    <li class = "contact-item">
+                        <div class = "contactimg-container">
+                            <img class = "contact-img" src = "{% static 'website/media/mail.png' %}"  alt = "email"> 
+                        </div><br>
+                        <div class= "contact-info">kelly@kellysshop.com</div>
+                    </li>
+                    <li class = "contact-item">
+                        <div class = contactimg-container>
+                            <img class = "contact-img" src = "{% static 'website/media/phone.png' %}"  alt = "phone"> 
+                        </div><br>
+                        <div class = "contact-info">613-000-0000</div>
+                    </li>
+                    <li class = "contact-item">
+                        <div class = contactimg-container>
+                            <img class = "contact-img" src = "{% static 'website/media/instagram.png' %}"  alt = "instagram"> 
+                        </div><br>
+                        <div class = "contact-info">@kellys_shop</div>
+                    </li>                    
+                    <li class = "contact-item">
+                        <div class = contactimg-container>
+                            <img class = "contact-img" src = "{% static 'website/media/address.png' %}"  alt = "address"> 
+                        </div><br>
+                        <div class = "contact-info">999 Street Ave, Ottawa, ON</div>
+                    </li>
+                </ul>
+        </div>
+        <div id = "contact-chat">
+            <div id = "chat-popup">
+                <div id = "message-view">
+                </div>
+                <form id = 'contact-form'>
+                        <input class = "receiver" value="kellysuperuser" style = "display:none;">
+                        <input class = "sender" value="{{ request.user.username }}" style = "display:none;">
+                    <div>
+                        <span>
+                            <textarea id="compose-message"></textarea> 
+                        </span>
+                        <span>
+                            <input type="submit" id = "send" value = "↑"/>
+                        </span>
+                        
+                    </div>
+                </form>
+            </div>
+            <div id = "chatbar">
+                <span id = "chat-w-us">Chat with us!</span> <span id = "chatbar-icon">&#9650;</span>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script%}
+    <script src = "{% static 'website/contact.js' %}"></script>
+{% endblock %}

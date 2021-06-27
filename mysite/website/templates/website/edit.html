@@ -1,0 +1,43 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div id = "show-imgs">
+        <div>
+            IMAGE 1
+            <img src = "{{ home.slide_img1.url }}">
+        </div>
+    </div>
+    <form action = "{% url 'edit' %}" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        Enter Slide Image 1:
+        <div class = "form-group">
+            {{ form.slide_img1 }}
+        </div>
+        Enter Slide Image 2:
+        <div class = "form-group">
+            {{ form.slide_img2 }}
+        </div>
+        Enter Slide Image 3:
+        <div class = "form-group">
+            {{ form.slide_img3 }}
+        </div>
+        Enter Slide Image 4:
+        <div class = "form-group">
+            {{ form.slide_img4 }}
+        </div>
+        Enter Slide Image 5:
+        <div class = "form-group">
+            {{ form.slide_img5 }}
+        </div>
+        Enter About Image:
+        <div class = "form-group">
+            {{ form.about_img }}
+        </div>
+        Enter Menu Image
+        <div class = "form-group">
+            {{ form.menu_img }}
+        </div>
+        <input type = "submit" value = "submit">
+    </form>
+{% endblock %}

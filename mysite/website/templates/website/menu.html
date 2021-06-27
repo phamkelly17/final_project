@@ -1,0 +1,55 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div>
+        <div id = "box3">
+        </div>
+        <div id = "menu-header">
+            <div id = "menu-title">Menu</div>
+            <div id = "menu-intro">Our shop sells all Kelly's favourite homemade goods including vegan (
+                <span>
+                    <img class = "vegan-icon" src = '{% static "website/media/vegan.png" %}'>
+                </span>
+                ) options!
+            </div>
+        </div>
+        <div id = "menu-triangle">&#9660</div>
+
+        <div id = "menu-message-view" style = "display: 'none';"> 
+        </div>
+
+        <div class = "menu-container">
+            <ul id = 'menu-list'>
+                {% for item in menu_items %}
+    
+                    <li class = "menu-item">
+                        <img class = "menu-img" src = '{{ item.image.url }}'>
+                        <h3 id = "item-name" value = '{{ item.name }}'>{{item.name}}<span>
+                            {% if item.vegan %}
+                            <img class = "vegan-icon" src = '{% static "website/media/vegan.png" %}'>
+                            {% endif %}
+                        </span></h3>
+                        <div>${{item.price}}
+                            <span>
+                                <span class = "add-cart"> 
+                                    <select class = "select-quantity {{item.name}}"> 
+                                    </select>
+                                    <button onclick = "add_cart('{{item.name}}')" class = "add-cart-btn">+</button>
+                                </span>
+                            </span>
+                        </div>
+                        <p class = "item-description">{{item.description}}</p>
+                        <br>
+                        
+                    </li>
+                {% endfor %}  
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src = "{% static 'website/cart.js' %}"></script>
+{% endblock %}

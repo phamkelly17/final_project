@@ -1,0 +1,22 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+
+{% block body%}
+<div>
+    <div id = 'login-container'>
+        {% if message%}
+            {{message}}
+        {% endif %}
+        <form action = "{% url 'login' %}" method = post>
+            {% csrf_token %}
+            <input autofocus type = "text" name = "username" placeholder = "Username">
+            <input autofocus type = "password" name = "password" placeholder = "Password">
+            <input type = "submit" value = "Login">
+        </form>
+
+        Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    </div>
+</div>
+
+
+{% endblock %}

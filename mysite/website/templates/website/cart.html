@@ -1,0 +1,68 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div>
+    <div class = "cart-container">
+        <div class = "cart-title">My Cart</div>
+    </div>
+    <div id = "cart-top">
+        <span class = "cart-item">Item</span>
+        <span class = "cart-quantity">Quantity</span>
+        <span class = "cart-total">Total</span>
+    </div>
+    <ul id = "cart-list">
+        {% for entry in entries%}
+        <div>
+            <li class= "cart-entry">
+                <img class = "cart-img" src = '{{ entry.menu_item.image.url }}'>
+                <span class = "cart-entry-item">{{entry.menu_item.name}}</span>
+                <span class = "cart-entry-quantity">{{entry.quantity}}</span>
+                <span class = "cart-entry-total">${{entry.item_total}}</span>
+                <span class = "cart-del-btn">
+                    <button class = "add-cart-btn" onclick = "delete_cart('{{entry.menu_item.name}}')">Delete</button>
+                </span>
+            </li>
+        </div>
+        {%empty%}
+            <div>No items in your cart.</div>
+        {% endfor %}
+    </ul>
+    {% if entries%}
+        <div id = "place-order">
+            <span id = "total-cost">Total Cost: ${{total}}</span>
+            <button onclick = "place_order()" id = "place-order" class="add-cart-btn">Place Order</button>
+        </div><br>
+    {%endif%}
+</div>
+
+<div>
+    <div>
+        <div class = "cart-title" style = "margin-left:3%;">Pending Orders</div>
+    </div><br>
+    <div id = "order-top">
+        <span class = "order-item">Date Placed</span>
+        <span class = "order-quantity">Items</span>
+        <span class = "order-total">Total</span>
+    </div>
+    <ul >
+        {% for order in orders%}
+        <div>
+            <li class= "cart-entry">
+                <span class = "cart-entry-item">{{order.timestamp}}</span>
+                <span class = "cart-entry-quantity">{{order.items.all|length}} items</span>
+                <span class = "cart-entry-total">${{order.total_cost}}</span>
+            </li><br>
+        </div>
+        {%empty%}
+            <div>No items in your cart.</div>
+        {% endfor %}
+    </ul>
+    <br>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src = "{% static 'website/cart.js' %}"></script>
+{% endblock %}

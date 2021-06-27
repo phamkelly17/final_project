@@ -1,0 +1,67 @@
+{% extends "website/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div>
+
+    <div class = "cart-container">
+        <div class = "cart-title">Orders</div>
+    </div>
+    <div id = "cart-top">
+        <span class = "orders-user">User</span>
+        <span class = "orders-items">Items</span>
+        <span class = "orders-total">Total</span>
+    </div>
+    <ul id = "cart-list">
+        {% for order in orders%}
+        <div class = "order-entry">
+            <li class= "cart-entry">
+                    <span class = "orders-user">{{order.user.username}}</span>
+                    <span class = "orders-items">{{order.items.all|length}} items</span>
+                    <span class= "orders-total">${{order.total_cost}}</span>
+                    <span class="order-complete" >
+                        <input onclick = "order_completed({{order.id}})" type="checkbox" name="order-complete">
+                        <label for="order-complete">Order Completed</label>
+                    </span>
+                    <div><br>
+                        <ul style = "list-style-type: circle;">
+                            {% for item in order.items.all %}
+                                <li class = "order-item-list">{{item.menu_item.name}} 
+                                    <span style = "font-weight:bold;">
+                                        x{{item.quantity}}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+            </li>
+        </div>
+        <br>
+        {%empty%}
+            <div>No items in your cart.</div>
+        {% endfor %}
+    </ul>
+</div>
+<!--
+    <h3>Orders</h3>
+    <ul>
+        {% for order in orders%}
+        
+        <div class = "cart-item">
+            <li >
+                {{order.user.username}}
+                {{order.items.all|length}} items
+                {{order.total_cost}}
+                <input onclick = "order_completed({{order.id}})" type="checkbox" id="order-complete" name="order-complete">
+                <label for="order-complete">Order Completed</label>
+            
+            </li>
+        </div>
+        {% endfor %}
+    </ul>
+-->
+{% endblock %}
+
+{% block script %}
+    <script src = "{% static 'website/orders.js' %}"></script>
+{% endblock %}
