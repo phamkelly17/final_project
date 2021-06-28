@@ -10,12 +10,10 @@ urlpatterns = [
     path ("login", views.login_view, name = "login"),
     path ("register", views.register, name = "register"),
     path ("logout", views.logout_view, name = "logout"),
-    path ("edit", views.edit, name = "edit"),
     path ("about", views.about, name = "about"),
     path ('menu', views.menu, name = "menu"),
     path ('reviews', views.reviews, name = "reviews"),
     path ('contact', views.contact, name = "contact"),
-    path ('editMenu', views.edit_menu, name = "edit_menu"),
     path ('cart', views.cart, name = "cart"),
     path ('orders', views.orders, name = "orders"),
 
