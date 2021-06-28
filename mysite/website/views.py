@@ -112,8 +112,8 @@ def register (request):
     else:
         return render (request, "website/register.html")
 
-@login_required
 @csrf_exempt
+@login_required
 def add_review (request):
     print ("in add_review")
 
@@ -145,8 +145,8 @@ def reviews_filtered(request, item):
     reviews = Review.objects.filter(product_bought = item)
     return JsonResponse([review.serialize() for review in reviews], safe = False)
 
-@login_required
 @csrf_exempt
+@login_required
 def add_message(request):
     print("in add message")
     if (request.method != 'POST'): 
@@ -175,8 +175,8 @@ def get_messages (request, user):
     #print(messages[0])
     return JsonResponse([message.serialize() for message in messages], safe=False)
 
-@login_required
 @csrf_exempt
+@login_required
 def add_cart (request):
     cart = request.user.cart
     data = json.loads(request.body)
@@ -206,8 +206,8 @@ def add_cart (request):
     
     return HttpResponse (status = 201)
 
-@login_required
 @csrf_exempt
+@login_required
 def delete_cart (request):
     data = json.loads(request.body)
     name = data.get("item","")
@@ -224,8 +224,8 @@ def delete_cart (request):
 
     return HttpResponse(status=204)
 
-@login_required
 @csrf_exempt
+@login_required
 def place_order (request):
     data = json.loads(request.body)
     cart = request.user.cart
@@ -277,8 +277,8 @@ def get_user_unread(request, name):
 
     return JsonResponse([message.serialize() for message in messages], safe = False)
 
-@login_required
 @csrf_exempt
+@login_required
 def read_messages(request):
     if request.method == "PUT":
         data = json.loads(request.body)
