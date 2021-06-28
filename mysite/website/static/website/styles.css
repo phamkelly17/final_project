@@ -9,7 +9,13 @@ ul{
 }
 #login-container{
     position: absolute;
-    top: 20%;
+    top: 10%;
+}
+.login-btn{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #c5d5c5;
+    color: #9fa9a3;
+    border: solid #9fa9a3 1px;
 }
 
 /*nav bar */
