@@ -4,6 +4,7 @@
 {% block body%}
 <div>
     <div id = 'login-container'>
+        <h3>Login</h3>
         {% if message%}
             {{message}}
         {% endif %}
@@ -11,7 +12,7 @@
             {% csrf_token %}
             <input autofocus type = "text" name = "username" placeholder = "Username">
             <input autofocus type = "password" name = "password" placeholder = "Password">
-            <input type = "submit" value = "Login">
+            <input type = "submit" value = "Login" class = "login-btn">
         </form>
 
         Don't have an account? <a href="{% url 'register' %}">Register here.</a>
