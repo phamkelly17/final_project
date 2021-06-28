@@ -3,18 +3,21 @@
 
 {% block body %}
 
-    {% if message%}
-        <div>
-            {{message}}
-        </div>
-    {% endif %}
-    <br><br><br><br><br><br><br><br><br>
-    <form action = "{% url 'register' %}" method = post>
-        {% csrf_token %}
-        <input autofocus type = "text" name = "username" placeholder = "Username">
-        <input autofocus type = "text" name = "email" placeholder = "Email">
-        <input autofocus type = "password" name = "password" placeholder = "Password">
-        <input autofocus type = "password" name = "confirmation" placeholder = "Confirmation">
-        <input type = "submit" value = "Register">
-    </form>
+    <div id = "login-container">
+        <h3>Create an Account</h3>
+        {% if message%}
+            <div>
+                {{message}}
+            </div>
+        {% endif %}
+        <form action = "{% url 'register' %}" method = post>
+            {% csrf_token %}
+            <input autofocus type = "text" name = "username" placeholder = "Username" style = "margin: 3px;"><br>
+            <input autofocus type = "text" name = "email" placeholder = "Email" style = "margin: 3px;"><br>
+            <input autofocus type = "password" name = "password" placeholder = "Password" style = "margin: 3px;"><br>
+            <input autofocus type = "password" name = "confirmation" placeholder = "Password" style = "margin: 3px;"><br>
+            <input type = "submit" value = "Register" class = "login-btn" style = "margin: 3px;">
+        </form>
+
+    </div>
 {% endblock %}
