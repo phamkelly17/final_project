@@ -360,7 +360,7 @@ ul{
         font-size: xx-large;
         color: #9fa9a3
     }
-    #leave-review-btn {
+    .reviews-btn{
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: large;
         color: #c5d5c5;
@@ -439,7 +439,7 @@ ul{
     }
     #prev-reviews{
         position: absolute;
-        left: 22%;
+        left: -5%;
         top: 55%;
     }
     #next-reviews{
@@ -447,6 +447,10 @@ ul{
         right: 10%;
         top: 55%;
     }  
+    .page_num{
+        position: absolute;
+        bottom: -5%;
+    }
 /* end reviews */
 
 /* about */
@@ -624,6 +628,16 @@ ul{
         font-size: xx-large;
         color: #9fa9a3;
     }
+    .get-sender{
+        width: 25%;
+        margin: 0px;
+    }
+    .unread {
+        position:absolute; 
+        left: 16%;
+        bottom: 7%;
+
+    }
     /* end contact*/
 
     /* cart */
@@ -747,15 +761,4 @@ ul{
     .order-item-list{
         position:relative;
         left:25%;
-    }
-
-    .get-sender{
-        width: 25%;
-        margin: 0px;
-    }
-    .unread {
-        position:absolute; 
-        left: 16%;
-        bottom: 7%;
-
     }
