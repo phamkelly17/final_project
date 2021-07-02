@@ -19,7 +19,12 @@
             <div id = "reviews-title">Reviews</div>
             <br>
             <div id = "review-btns">
-                <button id = "leave-review-btn">Leave a Review</button>
+                {% if user_auth%}
+                    <button id = "leave-review-btn" class = "reviews-btn">Leave a Review</button>
+                {%else%}
+                    <button class = "reviews-btn" onclick = "location.href = 'http://127.0.0.1:8000/login'">Login to leave a review</button>
+                    <button id = "leave-review-btn" class = "reviews-btn" style = "display:none">Leave a Review</button>
+                {% endif %}
                 <span id = "full-filter">
                     Filter:
                     <select id = "filter-item">
@@ -61,8 +66,8 @@
                 </form>
             </div> 
             <br>
-            <ul id = 'review-view'></div>
-            </div>
+            <ul id = 'review-view'></ul>
+            
             <a id = "prev-reviews" class = "prev">&#10094;</a>  
             <a id = "next-reviews" class = "next">&#10095;</a>
         </div>
