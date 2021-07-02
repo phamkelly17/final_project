@@ -38,28 +38,10 @@
         </div>
         <br>
         {%empty%}
-            <div>No items in your cart.</div>
+            <div>No orders.</div>
         {% endfor %}
     </ul>
 </div>
-<!--
-    <h3>Orders</h3>
-    <ul>
-        {% for order in orders%}
-        
-        <div class = "cart-item">
-            <li >
-                {{order.user.username}}
-                {{order.items.all|length}} items
-                {{order.total_cost}}
-                <input onclick = "order_completed({{order.id}})" type="checkbox" id="order-complete" name="order-complete">
-                <label for="order-complete">Order Completed</label>
-            
-            </li>
-        </div>
-        {% endfor %}
-    </ul>
--->
 {% endblock %}
 
 {% block script %}
