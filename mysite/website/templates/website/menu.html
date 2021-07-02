@@ -33,9 +33,11 @@
                         <div>${{item.price}}
                             <span>
                                 <span class = "add-cart"> 
-                                    <select class = "select-quantity {{item.name}}"> 
-                                    </select>
-                                    <button onclick = "add_cart('{{item.name}}')" class = "add-cart-btn">+</button>
+                                    {% if user_auth %}
+                                        <select class = "select-quantity {{item.name}}"> 
+                                        </select>
+                                        <button onclick = "add_cart('{{item.name}}')" class = "add-cart-btn">+</button>
+                                    {% endif %}
                                 </span>
                             </span>
                         </div>
