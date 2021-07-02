@@ -59,7 +59,6 @@ function post_review() {
 }
 
 function filter_item(){
-    console.log("HERE2");
     var menu_item = document.getElementById('filter-item').selectedOptions[0].value;
     document.querySelector('#review-view').innerHTML = "";
     //current_page = 0;
@@ -77,11 +76,18 @@ function filter_item(){
 
 function get_reviews (reviews, current_page){
     max_pages = Math.ceil(reviews.length/8)
+    if (max_pages === 0){
+        max_pages = 1;
+    }
     view = document.querySelector('#review-view');
     starting_review = current_page * 8;
     var j = starting_review;
 
-    while (j < starting_review + 8 && reviews[j]){
+    if (reviews.length === 0){
+        view.innerHTML = "No reviews yet."
+    }
+    else{
+        while (j < starting_review + 8 && reviews[j]){
             var user = document.createElement("div");
             user.innerHTML = reviews[j]["user"];
             user.style.fontWeight = "bold";
@@ -121,8 +127,11 @@ function get_reviews (reviews, current_page){
 
             j++;
         }
+    }
+    
     var page_num = document.createElement("div");
     page_num.innerHTML = `Page ${current_page + 1} of ${max_pages}` 
+    page_num.classList.add("page_num");
     page_num.style.color = "#9fa9a3";
     page_num.style.fontFamily = "Georgia, 'Times New Roman', Times, serif";
     view.appendChild(page_num);
@@ -134,7 +143,6 @@ function leave_review() {
 }
 
 function change_page (num){
-    console.log("HERE");
     if (current_page + num >= max_pages){
         current_page = 0;
     }
