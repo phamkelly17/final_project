@@ -2,12 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#dropdown').addEventListener('click', () => open_dropdown());
     document.addEventListener('click', close_dropdown);
 
-    load_page()
+    load_page();
 })
 
 function load_page(){
     var select_quantity = document.getElementsByClassName('select-quantity')
-    console.log(select_quantity.length)
     
     for(var j = 0; j < select_quantity.length; j++) {
         //select_quantity[j].id = `select-quantity${j}`;
@@ -22,11 +21,11 @@ function load_page(){
 }
 
 function add_cart (name) {
-    console.log("HERE")
+
     var item = name;
     select_quantity = document.getElementsByClassName(item)[0];
     quantity = select_quantity.selectedOptions[0].value;
-    console.log(quantity);
+
     fetch ('addCart', {
         method: "POST",
         body: JSON.stringify ({
@@ -39,6 +38,8 @@ function add_cart (name) {
     message.style.display = 'block';
     message.innerHTML = "Added to cart"
     close_message();
+    location.reload();
+    return false;
 }
 
 function delete_cart (name) {
@@ -52,7 +53,6 @@ function delete_cart (name) {
 }
  
 function place_order () {
-    console.log("HERE")
     fetch ('placeOrder', {
         method: "PUT",
         body: JSON.stringify ({
@@ -60,6 +60,7 @@ function place_order () {
         })
     });
     location.reload();
+    return false;
 }
 
 function close_message(){
