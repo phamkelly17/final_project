@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#dropdown').addEventListener('click', () => open_dropdown());
     document.addEventListener('click', close_dropdown);
 
-    get_unread()
-
+    get_unread();
 })
 
 function show_messages(){
@@ -85,6 +84,7 @@ function get_sender(value){
 }
 
 function open_chat() {
+
     var sender = document.querySelector('.sender').value;
     var receiver = document.querySelector('.receiver').value;
 
@@ -112,7 +112,6 @@ function get_unread(){
     fetch('unread')
         .then(response => response.json())
         .then(unread_messages => {
-            console.log(unread_messages.length);
             const chatbar = document.querySelector('#chat-w-us');
             chatbar.innerHTML += " (" + unread_messages.length + ")";
         })
