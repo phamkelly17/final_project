@@ -10,6 +10,9 @@
                 <span>We'd love to get in contact with you! </span>
                 <span>Just reach at our information listed below or use the chat function on this page and we'll try to get to you ASAP.</span>
             </div><br>
+            {% if not user_auth %}
+            <button class = "reviews-btn" onclick = "location.href = 'http://127.0.0.1:8000/login'">Login to chat with us</button>
+            {% endif %}
                 <ul id = "contact-list">
                     <li class = "contact-item">
                         <div class = "contactimg-container">
@@ -37,6 +40,7 @@
                     </li>
                 </ul>
         </div>
+        {% if user_auth %}
         <div id = "contact-chat">
             <div id = "chat-popup">
                 <div id = "message-view">
@@ -60,6 +64,31 @@
             </div>
         </div>
     </div>
+    {%else%}
+    <div style = "display:none;" id = "contact-chat">
+        <div id = "chat-popup">
+            <div id = "message-view">
+            </div>
+            <form id = 'contact-form'>
+                    <input class = "receiver" value="kellysuperuser" style = "display:none;">
+                    <input class = "sender" value="{{ request.user.username }}" style = "display:none;">
+                <div>
+                    <span>
+                        <textarea id="compose-message"></textarea> 
+                    </span>
+                    <span>
+                        <input type="submit" id = "send" value = "↑"/>
+                    </span>
+                    
+                </div>
+            </form>
+        </div>
+        <div id = "chatbar">
+            <span id = "chat-w-us">Chat with us!</span> <span id = "chatbar-icon">&#9650;</span>
+        </div>
+    </div>
+</div>
+    {% endif %}
 
 {% endblock %}
 
