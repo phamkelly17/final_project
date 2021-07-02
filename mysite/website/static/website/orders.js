@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function order_completed (id) {
-    console.log("here");
     fetch ('completeOrder', {
         method: "PUT",
         body: JSON.stringify ({
@@ -13,7 +12,7 @@ function order_completed (id) {
             id: id,
         })
     });
-    location.reload()
+    location.reload();
 }
 
 function open_dropdown() {
