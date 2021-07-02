@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Home, MenuItem, Review, Message, Cart, CartEntry,Order
+from .models import User, Home,About, MenuItem, Review, Message, Cart, CartEntry,Order
 # Create your views here.
 
 def index (request):
@@ -18,17 +18,25 @@ def index (request):
     })
 
 def about (request):
-    return render (request, "website/about.html")
+    about = About.objects.get(pk=1)
+    return render (request, "website/about.html",{
+        "main_text": about.main_text,
+        "side_text": about.side_text,
+    })
 
 def menu (request):
+    user_auth = request.user.is_authenticated
     return render (request, "website/menu.html", {
         'menu_items': MenuItem.objects.all(),
+        'user_auth': user_auth,
     })
 
 
 def reviews (request):
+    user_auth = request.user.is_authenticated
     return render (request, "website/reviews.html", {
         'menu_items': MenuItem.objects.all(),
+        'user_auth': user_auth,
     })
 
 def contact (request):
@@ -41,9 +49,14 @@ def contact (request):
         return render (request, "website/contactSuper.html",{
             "sender_list": sender_list
         })
-    return render (request, "website/contact.html")
+    user_auth = request.user.is_authenticated
+    return render (request, "website/contact.html",{
+        'user_auth': user_auth,
+    })
 
 def cart (request):
+    if not request.user.is_authenticated:
+        return render (request, "website/register.html")
     cart = request.user.cart
     total = cart.total_cost
     entries = cart.items.all()
@@ -115,8 +128,6 @@ def register (request):
 @csrf_exempt
 @login_required
 def add_review (request):
-    print ("in add_review")
-
     if (request.method != 'POST'): 
         return JsonResponse({"error": "POST request required."}, status=400)
 
@@ -148,7 +159,6 @@ def reviews_filtered(request, item):
 @csrf_exempt
 @login_required
 def add_message(request):
-    print("in add message")
     if (request.method != 'POST'): 
         return JsonResponse({"error": "POST request required."}, status=400)
 
@@ -172,7 +182,7 @@ def get_messages (request, user):
     messages_received = Message.objects.filter(receiver = current)
     messages = messages_sent | messages_received
     messages = messages.order_by("-timestamp").all().reverse()
-    #print(messages[0])
+
     return JsonResponse([message.serialize() for message in messages], safe=False)
 
 @csrf_exempt
@@ -203,7 +213,6 @@ def add_cart (request):
         cart.total_cost += entry.item_total
 
     cart.save()
-    
     return HttpResponse (status = 201)
 
 @csrf_exempt
@@ -237,7 +246,7 @@ def place_order (request):
         order.save()
         for item in cart.items.all():
             order.items.add(item)
-            #empty cart
+        #empty cart
         cart.items.clear()
         order.total_cost = cart.total_cost
         #clear cart
@@ -253,7 +262,6 @@ def place_order (request):
 
 @csrf_exempt
 def order_completed (request):
-    print ("order completed")
     data = json.loads(request.body)
     id = data.get("id","")
     order = Order.objects.get(pk = id)
